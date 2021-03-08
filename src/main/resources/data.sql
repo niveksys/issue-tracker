@@ -1,0 +1,12 @@
+INSERT INTO user (name) VALUES ('Peter');
+INSERT INTO user (name) VALUES ('Paul');
+INSERT INTO user (name) VALUES ('Mary');
+INSERT INTO issue_type (name) VALUES ('New Feature');
+INSERT INTO issue_type (name) VALUES ('Enhancement');
+INSERT INTO issue_type (name) VALUES ('Task');
+INSERT INTO issue_type (name) VALUES ('Bug');
+INSERT INTO issue_type (name) VALUES ('Incident');
+INSERT INTO status (name) VALUES ('Backlog');
+INSERT INTO status (name) VALUES ('Todo');
+INSERT INTO status (name) VALUES ('In Progress');
+INSERT INTO status (name) VALUES ('Done');
