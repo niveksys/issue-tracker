@@ -9,6 +9,7 @@ import com.niveksys.issuetracker.repository.UserRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,4 +42,17 @@ public class IssueController {
         return "issues/list";
     }
 
+    @GetMapping("/{id}")
+    public String showIssue(@PathVariable Long id, Model model) {
+        log.debug("SHOW an Issue by id: " + id);
+        model.addAttribute("issue", this.issueRepository.findById(id).orElse(null));
+        return "issues/show";
+    }
+
+    @GetMapping("/{id}/delete")
+    public String deleteIssue(@PathVariable Long id) {
+        log.debug("DELETE an Issue by id: " + id);
+        this.issueRepository.deleteById(id);
+        return "redirect:/issues";
+    }
 }
