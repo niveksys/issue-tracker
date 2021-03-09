@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::title}, ~{::body}, 'projects')}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <title>Issue Tracker - Projects</title>
+  </head>
+  <body>
+    <div class="container-fluid" style="margin-top: 20px">
+      <div class="row justify-content-md-center">
+        <div class="col-md-10">
+          <div class="table-responsive" th:if="${not #lists.isEmpty(projects)}">
+            <table class="table table-hover">
+              <thead class="table-sucess">
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Codename</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Owner</th>
+                  <th scope="colgroup" colspan="2"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr th:each="project : ${projects}">
+                  <td th:text="${project.id}">123</td>
+                  <td th:text="${project.codename}">SPRING-POC</td>
+                  <td>
+                    <a
+                      href="show.html"
+                      th:href="@{'/projects/' + ${project.id}}"
+                      th:text="${project.description}"
+                      >Spring Boot POC</a
+                    >
+                  </td>
+                  <td>
+                    <span
+                      class="badge rounded-pill bg-secondary bg-gradient"
+                      th:text="${project.owner.name}"
+                      >Paul</span
+                    >
+                  </td>
+                  <td>
+                    <a
+                      href="edit.html"
+                      th:href="@{'/projects/' + ${project.id} + '/edit'}"
+                      ><i class="bi bi-pencil-square"></i
+                    ></a>
+                  </td>
+                  <td>
+                    <a
+                      href="list.html"
+                      th:href="@{'/projects/' + ${project.id} + '/delete'}"
+                      ><i class="bi bi-trash"></i
+                    ></a>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
