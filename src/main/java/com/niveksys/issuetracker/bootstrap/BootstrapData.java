@@ -5,12 +5,12 @@ import javax.transaction.Transactional;
 import com.niveksys.issuetracker.model.Issue;
 import com.niveksys.issuetracker.model.IssueType;
 import com.niveksys.issuetracker.model.Project;
-import com.niveksys.issuetracker.model.Status;
+import com.niveksys.issuetracker.model.IssueStatus;
 import com.niveksys.issuetracker.model.User;
 import com.niveksys.issuetracker.repository.IssueRepository;
 import com.niveksys.issuetracker.repository.IssueTypeRepository;
 import com.niveksys.issuetracker.repository.ProjectRepository;
-import com.niveksys.issuetracker.repository.StatusRepository;
+import com.niveksys.issuetracker.repository.IssueStatusRepository;
 import com.niveksys.issuetracker.repository.UserRepository;
 
 import org.springframework.boot.CommandLineRunner;
@@ -26,16 +26,16 @@ public class BootstrapData implements CommandLineRunner {
     private final ProjectRepository projectRepository;
     private final IssueRepository issueRepository;
     private final IssueTypeRepository issueTypeRepository;
-    private final StatusRepository statusRepository;
+    private final IssueStatusRepository issueStatusRepository;
 
     public BootstrapData(UserRepository userRepository, ProjectRepository projectRepository,
             IssueRepository issueRepository, IssueTypeRepository issueTypeRepository,
-            StatusRepository statusRepository) {
+            IssueStatusRepository issueStatusRepository) {
         this.userRepository = userRepository;
         this.projectRepository = projectRepository;
         this.issueRepository = issueRepository;
         this.issueTypeRepository = issueTypeRepository;
-        this.statusRepository = statusRepository;
+        this.issueStatusRepository = issueStatusRepository;
     }
 
     @Override
@@ -54,7 +54,7 @@ public class BootstrapData implements CommandLineRunner {
         if (this.issueTypeRepository.count() == 0) {
             throw new RuntimeException("Issue Type didn't load from data.sql");
         }
-        if (this.statusRepository.count() == 0) {
+        if (this.issueStatusRepository.count() == 0) {
             throw new RuntimeException("Status didn't load from data.sql");
         }
     }
@@ -71,10 +71,10 @@ public class BootstrapData implements CommandLineRunner {
         IssueType bug = this.issueTypeRepository.findByNameIgnoreCase("bug").get();
         IssueType incident = this.issueTypeRepository.findByNameIgnoreCase("incident").get();
 
-        Status backlog = this.statusRepository.findByNameIgnoreCase("backlog").get();
-        Status todo = this.statusRepository.findByNameIgnoreCase("todo").get();
-        Status progress = this.statusRepository.findByNameIgnoreCase("in progress").get();
-        Status done = this.statusRepository.findByNameIgnoreCase("done").get();
+        IssueStatus backlog = this.issueStatusRepository.findByNameIgnoreCase("backlog").get();
+        IssueStatus todo = this.issueStatusRepository.findByNameIgnoreCase("todo").get();
+        IssueStatus progress = this.issueStatusRepository.findByNameIgnoreCase("in progress").get();
+        IssueStatus done = this.issueStatusRepository.findByNameIgnoreCase("done").get();
 
         Project springBootPOC = new Project();
         springBootPOC.setKey("SPRING-POC");

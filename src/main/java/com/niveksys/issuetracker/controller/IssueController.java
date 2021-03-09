@@ -3,7 +3,7 @@ package com.niveksys.issuetracker.controller;
 import com.niveksys.issuetracker.repository.IssueRepository;
 import com.niveksys.issuetracker.repository.IssueTypeRepository;
 import com.niveksys.issuetracker.repository.ProjectRepository;
-import com.niveksys.issuetracker.repository.StatusRepository;
+import com.niveksys.issuetracker.repository.IssueStatusRepository;
 import com.niveksys.issuetracker.repository.UserRepository;
 
 import org.springframework.stereotype.Controller;
@@ -20,15 +20,16 @@ public class IssueController {
 
     private final IssueRepository issueRepository;
     private final IssueTypeRepository issueTypeRepository;
-    private final StatusRepository statusRepository;
+    private final IssueStatusRepository issueStatusRepository;
     private final ProjectRepository projectRepository;
     private final UserRepository userRepository;
 
     public IssueController(IssueRepository issueRepository, IssueTypeRepository issueTypeRepository,
-            StatusRepository statusRepository, ProjectRepository projectRepository, UserRepository userRepository) {
+            IssueStatusRepository issueStatusRepository, ProjectRepository projectRepository,
+            UserRepository userRepository) {
         this.issueRepository = issueRepository;
         this.issueTypeRepository = issueTypeRepository;
-        this.statusRepository = statusRepository;
+        this.issueStatusRepository = issueStatusRepository;
         this.projectRepository = projectRepository;
         this.userRepository = userRepository;
     }
@@ -39,4 +40,5 @@ public class IssueController {
         model.addAttribute("issues", this.issueRepository.findAll());
         return "issues/list";
     }
+
 }

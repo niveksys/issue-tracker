@@ -42,7 +42,7 @@ public class Issue extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "status_id")
-    private Status status;
+    private IssueStatus status;
 
     public void addAssignee(User user) {
         this.assignees.add(user);
