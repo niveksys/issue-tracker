@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -55,4 +56,13 @@ public class IssueController {
         this.issueRepository.deleteById(id);
         return "redirect:/issues";
     }
+
+    @GetMapping(params = "search")
+    public String deleteIssue(@RequestParam("search") String text, Model model) {
+        log.debug("SEARCH all Issues by text: " + text);
+        model.addAttribute("issues",
+                this.issueRepository.findBySummaryContainingIgnoreCaseOrDescriptionContainingIgnoreCase(text, text));
+        return "issues/list";
+    }
+
 }
