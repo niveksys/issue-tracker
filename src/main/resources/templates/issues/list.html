@@ -40,8 +40,14 @@
               <tbody>
                 <tr th:each="issue : ${issues}">
                   <td th:text="${issue.id}">123</td>
-                  <td th:text="${issue.project.key}">SPRING-POC</td>
-                  <td th:text="${issue.type.name}">Task</td>
+                  <td th:text="${issue.project.codename}">SPRING-POC</td>
+                  <td>
+                    <i
+                      class="bi bi-list-task"
+                      th:class="'bi ' + ${issue.type.icon}"
+                    ></i>
+                    <span th:text="${issue.type.name}">Task</span>
+                  </td>
                   <td>
                     <a
                       href="show.html"

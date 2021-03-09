@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "status")
+@Table(name = "issue_status")
 public class IssueStatus extends BaseEntity {
 
     private static final long serialVersionUID = 1L;

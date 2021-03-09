@@ -77,13 +77,13 @@ public class BootstrapData implements CommandLineRunner {
         IssueStatus done = this.issueStatusRepository.findByNameIgnoreCase("done").get();
 
         Project springBootPOC = new Project();
-        springBootPOC.setKey("SPRING-POC");
+        springBootPOC.setCodename("SPRING-POC");
         springBootPOC.setDescription("Spring Boot POC");
         springBootPOC.setOwner(peter);
         this.projectRepository.save(springBootPOC);
 
         Project dockerPOC = new Project();
-        dockerPOC.setKey("DOCKER-POC");
+        dockerPOC.setCodename("DOCKER-POC");
         dockerPOC.setDescription("Docker POC");
         dockerPOC.setOwner(peter);
         this.projectRepository.save(dockerPOC);
