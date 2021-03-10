@@ -40,10 +40,7 @@
                   <td th:text="${project.id}">123</td>
                   <td th:text="${project.codename}">SPRING-POC</td>
                   <td>
-                    <a
-                      href="show.html"
-                      th:href="@{'/projects/' + ${project.id}}"
-                      th:text="${project.description}"
+                    <a href="#" th:text="${project.description}"
                       >Spring Boot POC</a
                     >
                   </td>
@@ -55,18 +52,10 @@
                     >
                   </td>
                   <td>
-                    <a
-                      href="edit.html"
-                      th:href="@{'/projects/' + ${project.id} + '/edit'}"
-                      ><i class="bi bi-pencil-square"></i
-                    ></a>
+                    <a href="#"><i class="bi bi-pencil-square"></i></a>
                   </td>
                   <td>
-                    <a
-                      href="list.html"
-                      th:href="@{'/projects/' + ${project.id} + '/delete'}"
-                      ><i class="bi bi-trash"></i
-                    ></a>
+                    <a href="#"><i class="bi bi-trash"></i></a>
                   </td>
                 </tr>
               </tbody>

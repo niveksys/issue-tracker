@@ -54,7 +54,7 @@ public class IssueController {
     }
 
     @GetMapping("/new")
-    public String newIssueForm(@PathVariable Long id, Model model) {
+    public String newIssueForm(Model model) {
         log.debug("NEW Issue FORM.");
         model.addAttribute("issue", new Issue());
         model.addAttribute("issueTypes", this.issueTypeRepository.findAll());
