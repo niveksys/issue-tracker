@@ -19,7 +19,8 @@ public class User extends BaseEntity {
 
     private static final long serialVersionUID = 1L;
 
-    private String name;
+    private String username;
+    private String password;
 
     @OneToMany(mappedBy = "owner")
     private Set<Project> projects = new HashSet<>();

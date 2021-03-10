@@ -44,7 +44,7 @@
                   <td>
                     <i
                       class="bi bi-list-task"
-                      th:class="'bi ' + ${issue.type.icon}"
+                      th:class="${issue.type.iconClass}"
                     ></i>
                     <span th:text="${issue.type.name}">Task</span>
                   </td>
@@ -60,11 +60,22 @@
                     <span
                       class="badge rounded-pill bg-secondary bg-gradient me-1"
                       th:each="assignee : ${issue.assignees}"
-                      th:text="${assignee.name}"
+                      th:text="${assignee.username}"
                       >Paul</span
                     >
                   </td>
-                  <td th:text="${issue.status.name}">Todo</td>
+                  <td>
+                    <span
+                      class="badge bg-success"
+                      th:class="${issue.status.badgeClass}"
+                    >
+                      <i
+                        class="bi-list-task"
+                        th:class="${issue.status.iconClass}"
+                      ></i>
+                      <span th:text="${issue.status.name}">Done</span>
+                    </span>
+                  </td>
                   <td>
                     <a
                       href="edit.html"

@@ -44,7 +44,10 @@
               </div>
               <div class="row mb-3">
                 <div class="col-sm-3"><strong>Type</strong></div>
-                <div class="col-sm-9" th:text="*{type.name}">Task</div>
+                <div class="col-sm-9">
+                  <i class="bi bi-list-task" th:class="*{type.iconClass}"></i>
+                  <span th:text="*{type.name}">Task</span>
+                </div>
               </div>
               <div class="row mb-3">
                 <div class="col-sm-3"><strong>Summary</strong></div>
@@ -67,7 +70,7 @@
                 <div class="col-sm-9">
                   <span
                     class="badge rounded-pill bg-secondary bg-gradient"
-                    th:text="*{reporter.name}"
+                    th:text="*{reporter.username}"
                     >Peter</span
                   >
                 </div>
@@ -78,16 +81,26 @@
                   <span
                     class="badge rounded-pill bg-secondary bg-gradient me-1"
                     th:each="assignee : *{assignees}"
-                    th:text="${assignee.name}"
+                    th:text="${assignee.username}"
                     >Paul</span
                   >
                 </div>
               </div>
               <div class="row mb-3">
                 <div class="col-sm-3"><strong>Status</strong></div>
-                <div class="col-sm-9" th:text="*{status.name}">Todo</div>
+                <div class="col-sm-9">
+                  <span
+                    class="badge bg-success"
+                    th:class="*{status.badgeClass}"
+                  >
+                    <i class="bi-list-task" th:class="*{status.iconClass}"></i>
+                    <span th:text="*{status.name}">Done</span>
+                  </span>
+                </div>
               </div>
-              <div class="row mb-3">
+            </div>
+            <div class="card-footer">
+              <div class="row">
                 <div class="col-sm-3"></div>
                 <div class="col-sm-9">
                   <a

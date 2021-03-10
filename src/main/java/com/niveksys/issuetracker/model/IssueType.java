@@ -1,5 +1,6 @@
 package com.niveksys.issuetracker.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -15,6 +16,8 @@ public class IssueType extends BaseEntity {
     private static final long serialVersionUID = 1L;
 
     private String name;
-    private String icon;
+
+    @Column(name = "icon_class")
+    private String iconClass;
 
 }

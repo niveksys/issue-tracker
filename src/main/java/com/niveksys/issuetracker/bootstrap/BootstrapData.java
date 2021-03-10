@@ -61,9 +61,9 @@ public class BootstrapData implements CommandLineRunner {
 
     private void loadIssues() {
 
-        User peter = this.userRepository.findByNameIgnoreCase("Peter").get();
-        User paul = this.userRepository.findByNameIgnoreCase("Paul").get();
-        User mary = this.userRepository.findByNameIgnoreCase("Mary").get();
+        User peter = this.userRepository.findByUsernameIgnoreCase("Peter").get();
+        User paul = this.userRepository.findByUsernameIgnoreCase("Paul").get();
+        User mary = this.userRepository.findByUsernameIgnoreCase("Mary").get();
 
         IssueType feature = this.issueTypeRepository.findByNameIgnoreCase("new feature").get();
         IssueType enhancement = this.issueTypeRepository.findByNameIgnoreCase("enhancement").get();
@@ -128,7 +128,7 @@ public class BootstrapData implements CommandLineRunner {
         issue4.setDescription("- Add Controller for RESTful API.");
         issue4.setReporter(peter);
         issue4.addAssignee(paul);
-        issue4.setStatus(todo);
+        issue4.setStatus(progress);
         this.issueRepository.save(issue4);
 
         Issue issue5 = new Issue();
