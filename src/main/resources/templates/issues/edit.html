@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  th:replace="~{fragments/layout :: layout (~{::title}, ~{::body}, 'issues')}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css"
+    />
+    <title>Issue Tracker - Edit Issue</title>
+  </head>
+  <body>
+    <div class="container-fluid" style="margin-top: 20px">
+      <div class="row justify-content-md-center">
+        <div class="col-md-10">
+          <form
+            th:object="${issue}"
+            th:action="@{'/issues/' + *{id}}"
+            method="post"
+          >
+            <div class="card">
+              <h5 class="card-header">
+                <span class="text-secondary" th:text="'#' + *{id}"></span>
+                <span th:text="*{summary}"
+                  >Setup Java Development Environment</span
+                >
+              </h5>
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-sm-3"><strong>ID</strong></div>
+                  <div class="col-sm-9" th:text="'#' + *{id}">#123</div>
+                  <input type="hidden" th:field="*{id}" />
+                </div>
+                <div class="row mb-3">
+                  <div class="col-sm-3"><strong>Project</strong></div>
+                  <div class="col-sm-9" th:text="*{project.codename}">
+                    SPRING-POC
+                  </div>
+                  <input type="hidden" th:field="*{project}" />
+                </div>
+                <div class="row mb-3">
+                  <label for="inputType" class="col-sm-3 col-form-label">
+                    <strong>Type</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <select
+                      class="form-select"
+                      id="inputType"
+                      th:field="*{type}"
+                    >
+                      <option
+                        th:each="issueType : ${issueTypes}"
+                        th:value="${issueType.id}"
+                        th:text="${issueType.name}"
+                      >
+                        Task
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputSummary" class="col-sm-3 col-form-label">
+                    <strong>Summary</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="inputSummary"
+                      th:field="*{summary}"
+                    />
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputDescription" class="col-sm-3 col-form-label">
+                    <strong>Description</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <textarea
+                      class="form-control"
+                      id="inputDescription"
+                      rows="5"
+                      th:field="*{description}"
+                    ></textarea>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputReporter" class="col-sm-3 col-form-label">
+                    <strong>Reporter</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <select
+                      class="form-select"
+                      id="inputReporter"
+                      th:field="*{reporter}"
+                    >
+                      <option
+                        th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"
+                      >
+                        Peter
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputAssignees" class="col-sm-3 col-form-label">
+                    <strong>Assignees</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <select
+                      class="form-select"
+                      multiple
+                      id="inputAssignees"
+                      th:field="*{assignees}"
+                    >
+                      <option
+                        th:each="user : ${users}"
+                        th:value="${user.id}"
+                        th:text="${user.username}"
+                      >
+                        Paul
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <div class="row mb-3">
+                  <label for="inputStatus" class="col-sm-3 col-form-label">
+                    <strong>Status</strong>
+                  </label>
+                  <div class="col-sm-9">
+                    <select
+                      class="form-select"
+                      id="inputStatus"
+                      th:field="*{status}"
+                    >
+                      <option
+                        th:each="issueStatus : ${issueStatuses}"
+                        th:value="${issueStatus.id}"
+                        th:text="${issueStatus.name}"
+                      >
+                        Task
+                      </option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3"></div>
+                  <div class="col-sm-9">
+                    <button type="submit" class="btn btn-success">
+                      Submit
+                    </button>
+                    <a
+                      href="list.html"
+                      class="btn btn-secondary"
+                      th:href="@{/issues}"
+                      >Cancel</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
