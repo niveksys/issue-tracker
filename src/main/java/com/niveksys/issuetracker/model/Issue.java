@@ -41,7 +41,7 @@ public class Issue extends BaseEntity {
     private Set<User> assignees = new HashSet<>();
 
     @ManyToOne
-    @JoinColumn(name = "status_id")
+    @JoinColumn(name = "issue_status_id")
     private IssueStatus status;
 
     public void addAssignee(User user) {
