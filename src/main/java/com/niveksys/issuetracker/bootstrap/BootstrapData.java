@@ -130,7 +130,7 @@ public class BootstrapData implements CommandLineRunner {
         issue4.setDescription("- Add Controller for RESTful API.");
         issue4.setReporter(peter);
         issue4.addAssignee(paul);
-        issue4.setStatus(progress);
+        issue4.setStatus(backlog);
         this.issueRepository.save(issue4);
 
         Issue issue5 = new Issue();
@@ -154,7 +154,7 @@ public class BootstrapData implements CommandLineRunner {
                 "1. Run MySQL Docker image.\n2. Test on mysql console.\n3. Install MySQL Workbench to test connectivity.");
         issue6.setReporter(peter);
         issue6.addAssignee(mary);
-        issue6.setStatus(todo);
+        issue6.setStatus(progress);
         this.issueRepository.save(issue6);
 
         Issue issue7 = new Issue();

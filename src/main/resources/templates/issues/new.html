@@ -26,7 +26,15 @@
         <div class="col-md-10">
           <form th:object="${issue}" th:action="@{/issues}" method="post">
             <div class="card">
-              <h5 class="card-header">Create new Issue</h5>
+              <h5 class="card-header">
+                Create new Issue
+                <a
+                  href="list.html"
+                  class="btn-close float-end"
+                  aria-label="Close"
+                  th:href="@{/issues}"
+                ></a>
+              </h5>
               <div class="card-body">
                 <div class="row mb-3">
                   <label for="inputProject" class="col-sm-3 col-form-label">

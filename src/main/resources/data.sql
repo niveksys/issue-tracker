@@ -6,7 +6,7 @@ INSERT INTO issue_type (name, icon_class) VALUES ('Enhancement', 'bi-file-earmar
 INSERT INTO issue_type (name, icon_class) VALUES ('Task', 'bi-clipboard-check');
 INSERT INTO issue_type (name, icon_class) VALUES ('Bug', 'bi-bug');
 INSERT INTO issue_type (name, icon_class) VALUES ('Incident', 'bi-exclamation-triangle');
-INSERT INTO issue_status (name, icon_class, badge_class) VALUES ('Backlog', 'bi-lightbulb', 'badge bg-light text-dark');
+INSERT INTO issue_status (name, icon_class, badge_class) VALUES ('Backlog', 'bi-lightbulb', 'badge bg-secondary');
 INSERT INTO issue_status (name, icon_class, badge_class) VALUES ('Todo', 'bi-bookmark-star', 'badge bg-primary');
 INSERT INTO issue_status (name, icon_class, badge_class) VALUES ('In Progress', 'bi-hourglass-split', 'badge bg-warning text-dark');
 INSERT INTO issue_status (name, icon_class, badge_class) VALUES ('Done', 'bi-check2-circle', 'badge bg-success');
