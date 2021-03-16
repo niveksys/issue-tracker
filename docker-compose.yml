@@ -1,0 +1,49 @@
+version: '3'
+
+services:
+  db:
+    image: mcr.microsoft.com/azure-sql-edge
+    container_name: sqledge
+    restart: always
+    ports:
+      - 1433:1433
+    volumes:
+      - ~/Volumes/sqledge:/var/opt/mssql
+    environment:
+      ACCEPT_EULA: Y
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD}
+    cap_add:
+      - SYS_PTRACE
+    networks:
+      - backend
+  app-server:
+    image: issue-tracker
+    depends_on:
+      - db
+    restart: always
+    expose:
+      - 8080
+    environment:
+      SPRING_PROFILES_ACTIVE: dev
+      DB_HOST: sqledge
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+    networks:
+      - frontend
+      - backend
+  gateway:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - app-server
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - frontend
+
+networks:
+  frontend:
+  backend:
