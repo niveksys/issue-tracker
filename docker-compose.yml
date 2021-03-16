@@ -3,7 +3,6 @@ version: '3'
 services:
   db:
     image: mcr.microsoft.com/azure-sql-edge
-    container_name: sqledge
     restart: always
     ports:
       - 1433:1433
@@ -16,24 +15,34 @@ services:
       - SYS_PTRACE
     networks:
       - backend
+  redis:
+    image: redis
+    restart: always
+    ports:
+      - 6379:6379
+    networks:
+      - backend
   app-server:
     image: issue-tracker
     depends_on:
       - db
+      - redis
     restart: always
     expose:
       - 8080
     environment:
       SPRING_PROFILES_ACTIVE: dev
-      DB_HOST: sqledge
+      DB_HOST: ${DB_HOST}
       DB_USER: ${DB_USER}
       DB_PASS: ${DB_PASS}
+      REDIS_HOST: ${REDIS_HOST}
+      REDIS_PASS: ${REDIS_PASS}
+      REDIS_PORT: ${REDIS_PORT}
     networks:
       - frontend
       - backend
   gateway:
     image: nginx
-    container_name: nginx
     depends_on:
       - app-server
     restart: always
