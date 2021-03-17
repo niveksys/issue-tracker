@@ -1,4 +1,5 @@
 FROM adoptopenjdk:11-jre-hotspot
+ARG JAR_FILE=target/*.jar
 WORKDIR /opt/app
-COPY target/issue-tracker-0.0.1-SNAPSHOT.jar /opt/app/issue-tracker.jar
+COPY ${JAR_FILE} /opt/app/issue-tracker.jar
 CMD ["java", "-jar", "/opt/app/issue-tracker.jar"]
