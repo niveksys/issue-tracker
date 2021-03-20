@@ -10,5 +10,6 @@ $ docker run --name sqledge --cap-add SYS_PTRACE -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA
 $ docker build -t issue-tracker .
 $ docker-compose config
 $ docker-compose up --build
+$ ./mvnw spring-boot:build-image -Dspring-boot.build-image.imageName=issue-tracker
 $ docker-compose up -d --scale app-server=3
 ```
