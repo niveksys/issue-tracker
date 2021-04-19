@@ -15,10 +15,10 @@ variables:
   MAVEN_OPTS: "-Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository"
 
 maven-build:
-  image: maven:3-jdk-11
+  image: maven:3-openjdk-11
   stage: build
   script:
-    - mvn --settings $MAVEN_SETTINGS_XML package -B
+    - mvn package -B
   artifacts:
     paths:
       - target/*.jar
