@@ -1,0 +1,103 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: issue-tracker
+spec:
+  selector:
+    app: issue-tracker
+  ports:
+  - port: 8080
+    nodePort: 30000
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: issue-tracker
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: issue-tracker
+  template:
+    metadata:
+      labels:
+        app: issue-tracker
+    spec:
+      containers:
+      - name: issue-tracker
+        image: issue-tracker
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        resources:
+          requests:
+            memory: 256Mi
+            cpu: 250m
+          limits:
+            memory: 512Mi
+            cpu: 500m
+        livenessProbe:
+          httpGet:
+            path: /actuator/health/liveness
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 5
+          timeoutSeconds: 2
+          failureThreshold: 3
+          successThreshold: 1
+        readinessProbe:
+          httpGet:
+            path: /actuator/health/readiness
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 10
+          timeoutSeconds: 2
+          failureThreshold: 3
+          successThreshold: 1
+        env:
+          - name: SPRING_PROFILES_ACTIVE
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: spring.profiles.active
+          - name: DB_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: db.host
+          - name: DB_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: db.port
+          - name: DB_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: db.name
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: db.user
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: db-secret
+                key: db.password
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: redis.host
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: env-config
+                key: redis.port
+          - name: REDIS_PASS
+            valueFrom:
+              secretKeyRef:
+                name: redis-secret
+                key: redis.password

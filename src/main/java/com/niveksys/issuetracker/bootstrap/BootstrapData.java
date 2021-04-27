@@ -20,8 +20,8 @@ import org.springframework.stereotype.Component;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Profile("default")
 @Component
+@Profile("default")
 public class BootstrapData implements CommandLineRunner {
 
     private final UserRepository userRepository;
